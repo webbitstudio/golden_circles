@@ -7,7 +7,8 @@ let params = {
     lineWidth: 2,
     firstCircleDiametre: 400,
     nbCircles: 10,
-    speed: 50
+    speed: 50,
+    colorRate: 10
 };
 
 function setup () {
@@ -29,10 +30,10 @@ function loop() {
 function draw() {
     for (i = 0; i < params.nbCircles; i++) {
         const diametre = params.firstCircleDiametre / Math.pow(phi, i);
-        const speed = params.speed / i
+        const speed = (100 - params.speed) / i
         const vect = vectorFromAngle((frameCount / speed) + initalRotation, diametre / phi);
         ctx.translate(vect.x, vect.y);
-        setStrokeStyle(frameCount + i * 10);
+        setStrokeStyle(frameCount + i * params.colorRate);
         circle(canvas.centerX, canvas.centerY, diametre);
     }
 }
